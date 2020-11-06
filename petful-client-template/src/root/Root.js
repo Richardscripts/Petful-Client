@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Header from '../header/header';
+import './root.css';
 
 function Root() {
-  return <div>
-    <h1>Petful</h1>
-  </div>
+  return (
+    <>
+      <Header />
+      <hr />
+    </>
+  );
 }
 
-export default Root
+export default Root;
