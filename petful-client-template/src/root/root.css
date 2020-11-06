@@ -1,3 +1,43 @@
 hr {
   width: 60%;
 }
+
+section {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.pet-container > img {
+  width: 100%;
+}
+
+.pets-section {
+  flex-direction: column;
+  display: flex;
+}
+
+.button-wrapper {
+  text-align: center;
+  margin: 10px;
+  margin-top: 125px;
+}
+
+@media all and (min-width: 600px) {
+  section {
+    flex-direction: row;
+  }
+
+  .pets-section {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pet-container {
+    flex: 1;
+  }
+
+  .people-container {
+    flex: 2;
+  }
+}

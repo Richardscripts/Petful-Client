@@ -1,21 +1,30 @@
 import React from 'react';
-import Api from '../helpers/api_helpers';
 
 class Dogs extends React.Component {
-  state = {
-    dogs: [],
-  };
-
-  async componentDidMount() {
-    let res = await Api.getDogs();
-    this.setState({
-      dogs: res,
-    });
-  }
-
   render() {
-    console.log(this.state);
-    return <></>;
+    const dogs = this.props.dogs.first.data;
+    const nextPup = (
+      <div className="pet-container">
+        Pupper Name: {dogs.name}
+        <br />
+        <img src={dogs.imageURL} alt="A heartwarming, picturesque dog" />
+        <br />
+        Age: {dogs.age}
+        <br />
+        Story: {dogs.story}
+        <br />
+        Breed: {dogs.breed}
+        <br />
+        Gender: {dogs.gender}
+        <br />
+        Description: {dogs.description}
+        <br />
+        <button type="button" onClick={(e) => this.props.handleDogAdopt(e)}>
+          Adopt
+        </button>
+      </div>
+    );
+    return <>{nextPup}</>;
   }
 }
 
