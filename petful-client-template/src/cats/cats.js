@@ -2,24 +2,40 @@ import React from 'react';
 
 class Cats extends React.Component {
   render() {
+    const selected = () => {
+      if (this.props.cat_adopt) {
+        return 'selected';
+      } else {
+        return 'unselected';
+      }
+    };
     const cats = this.props.cats.first.data;
     const nextCat = (
-      <div className="pet-container">
-        Catter Name: {cats.name}
+      <div className={`pet-container ${selected()}`}>
+        <span>Catter Name: {cats.name}</span>
         <br />
         <img src={cats.imageURL} alt="A heartwarming, picturesque cat" />
         <br />
-        Age: {cats.age}
+        <div className="words-container">
+          Age: {cats.age}
+          <br />
+          Story: {cats.story}
+          <br />
+          Breed: {cats.breed}
+          <br />
+          Gender: {cats.gender}
+          <br />
+          Description: {cats.description}
+        </div>
         <br />
-        Story: {cats.story}
-        <br />
-        Breed: {cats.breed}
-        <br />
-        Gender: {cats.gender}
-        <br />
-        Description: {cats.description}
-        <br />
-        <button onClick={() => this.props.handleCatAdopt()}>Adopt</button>
+        {this.props.usersTurn && (
+          <button
+            className="myButton"
+            onClick={() => this.props.handleCatAdopt()}
+          >
+            Adopt
+          </button>
+        )}
       </div>
     );
     return <>{nextCat}</>;

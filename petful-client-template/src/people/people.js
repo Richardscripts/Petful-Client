@@ -1,11 +1,14 @@
 import React from 'react';
 import ApiHelpers from '../helpers/api_helpers';
+import './people.css';
 
 class People extends React.Component {
   state = {
     people: [],
     addingName: false,
     addedName: false,
+    firstName: '',
+    userName: null,
   };
 
   handleAddName = () => {
@@ -18,22 +21,30 @@ class People extends React.Component {
     let res = await ApiHelpers.addPerson(person.value);
     this.setState({
       people: [...this.state.people, res.data],
+      userName: person.value,
       addingName: false,
       addedName: true,
     });
+    this.props.handleStartDemo();
   }
 
   componentDidUpdate() {
-    if (this.props.personDeleted === true) {
+    if (this.props.personListUpdated === true) {
       this.getPeople();
-      this.props.handleUpdatePeopleDeleted();
+      this.props.handleUpdatePeopleList();
+    }
+    if (this.state.firstName === this.state.userName) {
+      this.setState({ userName: null });
+      this.props.handleUpdateUsersTurn();
     }
   }
 
   async getPeople() {
     let res = await ApiHelpers.getPeople();
+    let peopleList = this.populatePeopleList(res);
     this.setState({
-      people: this.populatePeopleList(res),
+      people: peopleList,
+      firstName: peopleList[0],
     });
   }
 
@@ -62,22 +73,31 @@ class People extends React.Component {
 
     return (
       <div className="people-container">
+        Adopters List:
+        <br />
+        <br />
         {people}
-        {!this.state.addedName && (
-          <>
-            <button type="button" onClick={() => this.handleAddName()}>
-              Add Name to List
-            </button>
-            <br />
-          </>
-        )}
         {this.state.addingName && (
           <>
             <form onSubmit={(e) => this.handleSubmitName(e)} action="#">
-              <label>Name:</label>
+              <label htmlFor="person">Input Name:</label>
               <input id="person"></input>
-              <button type="submit">Submit</button>
+              <button className=" myButton" type="submit">
+                Submit
+              </button>
             </form>
+          </>
+        )}
+        {!this.state.addedName && (
+          <>
+            <button
+              className="addbutton myButton"
+              type="button"
+              onClick={() => this.handleAddName()}
+            >
+              Add Name to List
+            </button>
+            <br />
           </>
         )}
       </div>

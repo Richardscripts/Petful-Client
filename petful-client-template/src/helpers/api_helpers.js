@@ -73,7 +73,7 @@ const ApiHelpers = {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        person,
+        person: person,
       }),
     });
     if (!res.ok) {

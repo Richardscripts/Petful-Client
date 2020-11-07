@@ -4,10 +4,22 @@ header {
   text-align: center;
 }
 
+header > img {
+  vertical-align: middle;
+  margin-bottom: 14px;
+}
+
 header > h1 {
   font-size: 40px;
+  font-family: monospace;
+  display: inline;
 }
 
 nav {
   font-weight: bold;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
